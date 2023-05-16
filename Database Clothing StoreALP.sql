@@ -128,3 +128,21 @@ values
 ('k0007','Activewear'),
 ('k0008','Outerwear');
 
+insert into UKURAN (Ukuran_id, Nama_ukuran)
+values
+('U0001', 'XS'),
+('U0002', 'S'),
+('U0003', 'M'),
+('U0004', 'L'),
+('U0005', 'XL');
+
+insert into WARNA (Warna_id, Nama_warna)
+values
+('W0001', 'Black'),
+('W0002', 'White'),
+('W0003', 'Gray'),
+('W0004', 'Beige'),
+('W0005', 'Red'),
+('W0006', 'Green'),
+('W0007', 'Blue');
+
