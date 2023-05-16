@@ -53,8 +53,10 @@ create table UKURAN(
 
 create table TRANSAKSI(
 	Transaksi_id varchar (5),
+    Customer_id varchar (5),
     Tanggal_transaksi date,
     Total_harga int,
+    foreign key (Customer_id) references Customer(Customer_id),
 	Primary Key (Transaksi_id)
 );
 
@@ -145,4 +147,3 @@ values
 ('W0005', 'Red'),
 ('W0006', 'Green'),
 ('W0007', 'Blue');
-
