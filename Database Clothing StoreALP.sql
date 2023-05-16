@@ -92,5 +92,39 @@ create table DETAIL_WISHLIST(
     foreign key (Ukuran_id) references UKURAN(Ukuran_id)
 );
 
+insert into Customer (Customer_id, Nama_customer, Email_customer, Password_customer)
+values
+('C9999','Guest','guest@gmail.com','000000000'),				-- data guest untuk guest login nanti
+('C0000','Rangga Rijasa','ranggar@gmail.com','1234567890'),
+('C0001','John Smith','johnsmith@example.com','p@ssw0rd1'),
+('C0002','Emily Johnson','ejohnson@example.com','secure123'),
+('C0003','Michael Brown','mbrown@example.com','password123'),
+('C0004','Sarah Davis','sdavis@example.com','mysecretpass'),
+('C0005','David Wilson','dwilson@example.com','abc123'),
+('C0006','Jennifer Lee','jlee@example.com','ilovecats'),
+('C0007','Robert Clark','rclark@example.com','qwerty123'),
+('C0008','Jessica Hall','jhall@example.com','letmein'),
+('C0009','Andrew Young','ayoung@example.com','123456'),
+('C0010','Amanda Turner','aturner@example.com','passw0rd!'),
+('C0011','Brian Moore','bmoore@example.com','sunshine123'),
+('C0012','Megan Lewis','mlewis@example.com','hello123'),
+('C0013','Christopher Hill','chill@example.com','mypassword'),
+('C0014','Samantha Martinez','smartinez@example.com','secretword'),
+('C0015','William Anderson','wanderson@example.com','ilovemydog'),
+('C0016','Olivia Garcia','ogarcia@example.com','qwertyuiop'),
+('C0017','Daniel Rodriguez','drodriguez@example.com','987654321'),
+('C0018','Sophia Jackson','sjackson@example.com','pass123!'),
+('C0019','James Taylor','jtaylor@example.com','1qaz2wsx'),
+('C0020','Lily Adams','ladams@example.com','welcome123');
 
+insert into KATEGORI_PRODUK (kategori_id, Nama_kategori)
+values
+('k0001','T-shirts'),
+('k0002','Jeans'),
+('k0003','Dresses'),
+('k0004','Sweaters'),
+('k0005','Shoes'),
+('k0006','Accessories'),
+('k0007','Activewear'),
+('k0008','Outerwear');
 
