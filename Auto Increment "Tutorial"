@@ -1,0 +1,37 @@
+drop database test;
+create database test;
+use test;
+
+create table customer(
+	Customer_id int unsigned not null auto_increment, -- buat auto increment, supaya id ketambah 1 terus
+    Nama_customer varchar(50) not null,
+    Primary Key (Customer_id)
+);
+
+create table TRANSAKSI(
+	Transaksi_id int unsigned not null auto_increment,
+    Customer_id int unsigned ,
+    Nama_customer varchar(50) not null,
+    total_harga int,
+    foreign key (Customer_id) references customer(Customer_id),
+	Primary Key (Transaksi_id)
+);
+
+
+insert into customer(Nama_customer) -- cara insertnya
+values
+('rangga'),
+('radit'),
+('rafa');
+
+INSERT INTO TRANSAKSI (Customer_id,Nama_customer,total_harga) -- cara insert ke table yang ada primary key dan foreign key yang pakai auto-increment
+VALUES
+((SELECT Customer_id FROM customer WHERE Nama_customer = 'rangga'),(SELECT Nama_customer FROM customer WHERE Nama_customer = 'rangga'),1000),
+((SELECT Customer_id FROM customer WHERE Nama_customer = 'rafa'),(SELECT Nama_customer FROM customer WHERE Nama_customer = 'rafa'),3025),
+((SELECT Customer_id FROM customer WHERE Nama_customer = 'rafa'),(SELECT Nama_customer FROM customer WHERE Nama_customer = 'rafa'),9584);
+
+
+select concat('T', LPAD(Transaksi_id, 4, 0)) as transaksi_id, 				-- cara select untuk id yang pakai auto increment
+	   concat('C', LPAD(Customer_id, 4, 0)) as customer_id, Nama_customer ,
+       total_harga
+from TRANSAKSI;
