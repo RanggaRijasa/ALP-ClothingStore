@@ -1,0 +1,253 @@
+DROP DATABASE clothingstore;
+CREATE DATABASE clothingstore;
+USE clothingstore;
+
+-- Customer akun
+create table Customer(
+	Customer_id int unsigned not null auto_increment,
+    Nama_customer varchar(50) not null,
+    Email_customer varchar(50) not null,
+    Password_customer varchar(50) not null,
+    constraint Email_customer unique (Email_customer),
+    Primary Key (Customer_id)
+);
+
+-- Produk
+create table KATEGORI_PRODUK(
+	kategori_id int unsigned not null auto_increment,
+    Nama_kategori varchar (50) not null,
+	Primary Key (kategori_id)
+);
+
+create table PRODUK(
+	Produk_id int unsigned not null auto_increment,
+    kategori_id int unsigned,
+    Nama_produk varchar(50) not null,
+	harga int,
+    quantity int,
+    foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id),
+	Primary Key (Produk_id)
+    
+    -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
+);
+
+/*
+create table PRODUK(
+	Produk_id varchar (5),
+    kategori_id varchar (5),
+    Nama_produk varchar(50) not null,
+	harga int,
+	Primary Key (Produk_id),
+    constraint fk_kategori foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
+    -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
+);
+*/
+
+
+
+/*
+alter table PRODUK
+	add constraint foreign key(Nama_kategori) references KATEGORI_PRODUK(Nama_kategori);
+*/
+    
+create table WARNA(
+	Warna_id int unsigned not null auto_increment,
+    Nama_warna varchar (50) not null,
+	Primary Key (Warna_id)
+);
+
+create table UKURAN(
+	Ukuran_id int unsigned not null auto_increment,
+    Nama_ukuran varchar (50) not null,
+	Primary Key (Ukuran_id)
+);
+
+-- Transaksi/Sales
+
+create table TRANSAKSI(
+	Transaksi_id int unsigned not null auto_increment,
+    Customer_id int unsigned,
+    Tanggal_transaksi date,
+    Total_harga int,
+    foreign key (Customer_id) references Customer(Customer_id),
+	Primary Key (Transaksi_id)
+);
+
+create table DETAIL_TRANSAKSI(
+	Detail_id int unsigned not null auto_increment,
+    Transaksi_id int unsigned,
+    Produk_id int unsigned,
+    Warna_id int unsigned,
+    Ukuran_id int unsigned,
+    foreign key (Transaksi_id) references TRANSAKSI(Transaksi_id),
+    foreign key (Produk_id) references PRODUK(Produk_id),
+    foreign key (Warna_id) references WARNA(Warna_id),
+    foreign key (Ukuran_id) references UKURAN(Ukuran_id),
+    primary key (DEtail_id),
+	Jumlah int default 0
+);
+
+-- Wishlist
+
+create table WISHLISTS(
+	Wishlist_id int unsigned not null auto_increment,
+	Customer_id int unsigned,
+    Nama_Wishlist varchar (50) not null,
+    primary key (Wishlist_id),
+    foreign key (Customer_id) references CUSTOMER(Customer_id)
+);
+
+create table DETAIL_WISHLIST(
+	Detail_WLID int unsigned not null auto_increment,
+	Wishlist_id int unsigned,
+	Produk_id int unsigned,
+    Warna_id int unsigned,
+    Ukuran_id int unsigned,
+    foreign key (Wishlist_id) references WISHLISTS(Wishlist_id),
+	foreign key (Produk_id) references PRODUK(Produk_id),
+    foreign key (Warna_id) references WARNA(Warna_id),
+    foreign key (Ukuran_id) references UKURAN(Ukuran_id),
+    primary key (Detail_WLID)
+);
+
+insert into Customer (Nama_customer, Email_customer, Password_customer)
+values
+('Guest','guest@gmail.com','000000000'),				-- data guest untuk guest login nanti
+('Rangga Rijasa','ranggar@gmail.com','1234567890'),
+('John Smith','johnsmith@example.com','p@ssw0rd1'),
+('Emily Johnson','ejohnson@example.com','secure123'),
+('Michael Brown','mbrown@example.com','password123'),
+('Sarah Davis','sdavis@example.com','mysecretpass'),
+('David Wilson','dwilson@example.com','abc123'),
+('Jennifer Lee','jlee@example.com','ilovecats'),
+('Robert Clark','rclark@example.com','qwerty123'),
+('Jessica Hall','jhall@example.com','letmein'),
+('Andrew Young','ayoung@example.com','123456'),
+('Amanda Turner','aturner@example.com','passw0rd!'),
+('Brian Moore','bmoore@example.com','sunshine123'),
+('Megan Lewis','mlewis@example.com','hello123'),
+('Christopher Hill','chill@example.com','mypassword'),
+('Samantha Martinez','smartinez@example.com','secretword'),
+('William Anderson','wanderson@example.com','ilovemydog'),
+('Olivia Garcia','ogarcia@example.com','qwertyuiop'),
+('Daniel Rodriguez','drodriguez@example.com','987654321'),
+('Sophia Jackson','sjackson@example.com','pass123!'),
+('James Taylor','jtaylor@example.com','1qaz2wsx'),
+('Lily Adams','ladams@example.com','welcome123');
+
+insert into KATEGORI_PRODUK (Nama_kategori)
+values
+('T-shirts'),
+('Jeans'),
+('Dresses'),
+('Sweaters'),
+('Shoes'),
+('Accessories'),
+('Activewear'),
+('Outerwear');
+
+insert into UKURAN (Nama_ukuran)
+values
+('XS'),
+('S'),
+('M'),
+('L'),
+('XL');
+
+insert into WARNA (Nama_warna)
+values
+('Black'),
+('White'),
+('Gray'),
+('Beige'),
+('Red'),
+('Green'),
+('Maroon'),
+('Olive'),
+('Teal'),
+('Navy'),
+('Orange'),
+('Yellow'),
+('Lime'),
+('Cyan'),
+('Violet'),
+('Pink'),
+('Apricot'),
+('Mint'),
+('Lavender'),
+('Blue');
+
+insert into PRODUK(kategori_id, Nama_produk, harga, quantity)
+values 
+-- T-shirt
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Oversize Lengan Pendek', 149000, 165),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Grafis Monokrom', 129000, 155),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Basic Putih', 99000, 160),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Vintage Washed', 139000, 170),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Polo Slim Fit', 169000, 175),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Striped Breton', 119000, 165),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Tie-Dye', 159000, 160),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'T-shirts'), 'T-shirt Pocket Detail', 109000, 170),
+-- Jeans
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Ultra Strech', 549000, 213),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Skinny Fit', 349000, 206),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Slim Fit', 499000, 152),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Potongan Klasik', 549000, 44),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Wide Fit', 399000, 101),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Slim Fit (Damaged)', 599000, 143),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Slim Fit Strech Selvedge', 499000, 129),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Jeans'), 'Jeans Skinny Fit Denim', 599000, 244),
+-- Dresses
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Libra Dress', 549000, 45),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Floral Elegance Dress', 699000, 67),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Ruffled Charm Dress', 599000, 42),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Vintage Lace Gown', 899000, 50),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Bohemian Maxi Dress', 749000, 62),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Off-Shoulder Romance', 649000, 81),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Polka Dot Delight', 499000, 40),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Dresses'), 'Satin Slip Dress', 799000, 67),
+-- Sweater
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Oversize Sweater Oblong', 399000, 67),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Cozy Knit Pullover', 459000, 221),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Chunky Cable-Knit Sweater', 549000, 42),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Turtleneck Sweater Dress', 699000, 223),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Striped Mohair Sweater', 579000, 231),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Hooded Fleece Sweatshirt', 399000, 150),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Cropped Cashmere Sweater', 799000, 123),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Sweaters'), 'Fair Isle Knit Sweater', 649000, 212),
+-- Shoes
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Running Shoes (Women', 549000, 234),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Running Shoes (Men)', 549000, 123),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Casual Sneakers (Women)', 499000, 122),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Casual Sneakers (Men)', 499000, 190),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Athletic Training Shoes (Women)', 599000, 121),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Athletic Training Shoes (Men)', 599000, 0),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Fashion Boots (Women)', 699000, 123),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Shoes'), 'Fashion Boots (Men)', 699000, 231),
+-- Accssories
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Topi Bucket', 129000, 100),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Gelang Kulit', 99000, 45),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Kalung Choker', 69000, 131),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Kacamata Retro', 149000, 71),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Sarung Tangan Wol', 79000, 189),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Sabuk Kulit', 129000, 250),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Koper Kanvas', 349000, 230),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Accessories'), 'Scarf Rajut', 109000, 201),
+-- Activewear
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Yoga Leggin', 199000, 43),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Running Shorts', 149000, 194),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Sports Bra', 99000, 193),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Performance Tank Top', 129000, 123),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Athletic Hoodie', 179000, 588),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Training Compression Socks', 69000, 199),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'CrossFit Gloves', 79000, 60),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Activewear'), 'Cycling Jersey', 169000, 164),
+-- Outerwear
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Cape Blazer', 349000, 142),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Trench Coat', 499000, 191),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Bomber Jacket', 259000, 45),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Parka Hoodie', 389000, 52),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Denim Jacket', 279000, 0),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Puffer Vest', 199000, 121),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Leather Biker Jacket', 599000, 131),
+((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Windbreaker', 229000, 73);
