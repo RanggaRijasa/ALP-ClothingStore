@@ -13,7 +13,6 @@ create table Customer(
 );
 
 -- Produk
-
 create table KATEGORI_PRODUK(
 	kategori_id varchar (5),
     Nama_kategori varchar (50) not null,
@@ -25,10 +24,23 @@ create table PRODUK(
     kategori_id varchar (5),
     Nama_produk varchar(50) not null,
 	harga int,
+    quantity int,
 	Primary Key (Produk_id),
     constraint fk_kategori foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
     -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
 );
+
+/*
+create table PRODUK(
+	Produk_id varchar (5),
+    kategori_id varchar (5),
+    Nama_produk varchar(50) not null,
+	harga int,
+	Primary Key (Produk_id),
+    constraint fk_kategori foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
+    -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
+);
+*/
 
 
 
@@ -147,3 +159,78 @@ values
 ('W0005', 'Red'),
 ('W0006', 'Green'),
 ('W0007', 'Blue');
+
+insert into PRODUK(produk_id, kategori_id, Nama_produk, harga, quantity)
+values 
+-- T-shirt
+('TSH01', 'k0001', 'T-shirt Oversize Lengan Pendek', 149000, 165),
+('TSH02', 'k0001', 'T-shirt Grafis Monokrom', 129000, 155),
+('TSH03', 'k0001', 'T-shirt Basic Putih', 99000, 160),
+('TSH04', 'k0001', 'T-shirt Vintage Washed', 139000, 170),
+('TSH05', 'k0001', 'T-shirt Polo Slim Fit', 169000, 175),
+('TSH06', 'k0001', 'T-shirt Striped Breton', 119000, 165),
+('TSH07', 'k0001', 'T-shirt Tie-Dye', 159000, 160),
+('TSH08', 'k0001', 'T-shirt Pocket Detail', 109000, 170),
+-- Jeans
+('JNS01', 'k0002', 'Jeans Ultra Strech', 549000, 213),
+('JNS02', 'k0002', 'Jeans Skinny Fit', 349000, 206),
+('JNS03', 'k0002', 'Jeans Slim Fit', 499000, 152),
+('JNS04', 'k0002', 'Jeans Potongan Klasik', 549000, 44),
+('JNS05', 'k0002', 'Jeans Wide Fit', 399000, 101),
+('JNS06', 'k0002', 'Jeans Slim Fit (Damaged)', 599000, 143),
+('JNS07', 'k0002', 'Jeans Slim Fit Strech Selvedge', 499000, 129),
+('JNS08', 'k0002', 'Jeans Skinny Fit Denim', 599000, 244),
+-- Dresses
+('DRS01', 'k0003', 'Libra Dress', 549000, 45),
+('DRS02', 'k0003', 'Floral Elegance Dress', 699000, 67),
+('DRS03', 'k0003', 'Ruffled Charm Dress', 599000, 42),
+('DRS04', 'k0003', 'Vintage Lace Gown', 899000, 50),
+('DRS05', 'k0003', 'Bohemian Maxi Dress', 749000, 62),
+('DRS06', 'k0003', 'Off-Shoulder Romance', 649000, 81),
+('DRS07', 'k0003', 'Polka Dot Delight', 499000, 40),
+('DRS08', 'k0003', 'Satin Slip Dress', 799000, 67),
+-- Sweater
+('SWT01', 'k0004', 'Oversize Sweater Oblong', 399000, 67),
+('SWT02', 'k0004', 'Cozy Knit Pullover', 459000, 221),
+('SWT03', 'k0004', 'Chunky Cable-Knit Sweater', 549000, 42),
+('SWT04', 'k0004', 'Turtleneck Sweater Dress', 699000, 223),
+('SWT05', 'k0004', 'Striped Mohair Sweater', 579000, 231),
+('SWT06', 'k0004', 'Hooded Fleece Sweatshirt', 399000, 150),
+('SWT07', 'k0004', 'Cropped Cashmere Sweater', 799000, 123),
+('SWT08', 'k0004', 'Fair Isle Knit Sweater', 649000, 212),
+-- Shoes
+('SHS01', 'k0005', 'Running Shoes (Women', 549000, 234),
+('SHS02', 'k0005', 'Running Shoes (Men)', 549000, 123),
+('SHS03', 'k0005', 'Casual Sneakers (Women)', 499000, 122),
+('SHS04', 'k0005', 'Casual Sneakers (Men)', 499000, 190),
+('SHS05', 'k0005', 'Athletic Training Shoes (Women)', 599000, 121),
+('SHS06', 'k0005', 'Athletic Training Shoes (Men)', 599000, 0),
+('SHS07', 'k0005', 'Fashion Boots (Women)', 699000, 123),
+('SHS08', 'k0005', 'Fashion Boots (Men)', 699000, 231),
+-- Accssories
+('ACC01', 'k0006', 'Topi Bucket', 129000, 100),
+('ACC02', 'k0006', 'Gelang Kulit', 99000, 45),
+('ACC03', 'k0006', 'Kalung Choker', 69000, 131),
+('ACC04', 'k0006', 'Kacamata Retro', 149000, 71),
+('ACC05', 'k0006', 'Sarung Tangan Wol', 79000, 189),
+('ACC06', 'k0006', 'Sabuk Kulit', 129000, 250),
+('ACC07', 'k0006', 'Koper Kanvas', 349000, 230),
+('ACC08', 'k0006', 'Scarf Rajut', 109000, 201),
+-- Activewear
+('ATW01', 'k0007', 'Yoga Leggin', 199000, 43),
+('ATW02', 'k0007', 'Running Shorts', 149000, 194),
+('ATW03', 'k0007', 'Sports Bra', 99000, 193),
+('ATW04', 'k0007', 'Performance Tank Top', 129000, 123),
+('ATW05', 'k0007', 'Athletic Hoodie', 179000, 588),
+('ATW06', 'k0007', 'Training Compression Socks', 69000, 199),
+('ATW07', 'k0007', 'CrossFit Gloves', 79000, 60),
+('ATW08', 'k0007', 'Cycling Jersey', 169000, 164),
+-- Outerwear
+('OTW01', 'k0008', 'Cape Blazer', 349000, 142),
+('OTW02', 'k0008', 'Trench Coat', 499000, 191),
+('OTW03', 'k0008', 'Bomber Jacket', 259000, 45),
+('OTW04', 'k0008', 'Parka Hoodie', 389000, 52),
+('OTW05', 'k0008', 'Denim Jacket', 279000, 0),
+('OTW06', 'k0008', 'Puffer Vest', 199000, 121),
+('OTW07', 'k0008', 'Leather Biker Jacket', 599000, 131),
+('OTW08', 'k0008', 'Windbreaker', 229000, 73);
