@@ -251,3 +251,26 @@ values
 ((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Puffer Vest', 199000, 121),
 ((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Leather Biker Jacket', 599000, 131),
 ((SELECT kategori_id FROM KATEGORI_PRODUK WHERE Nama_kategori = 'Outerwear'), 'Windbreaker', 229000, 73);
+
+insert into WISHLISTS (Customer_id, Nama_Wishlist)
+values
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Rangga Rijasa'),'Fashion Forward'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Rangga Rijasa'),'Trendsetters Delight'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'John Smith'),'Chic Closet'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Emily Johnson'),'Style Haven'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Emily Johnson'),'Wardrobe Wishes'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Emily Johnson'),'Couture Dreams'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Jennifer Lee'),'Glamour Galore'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Michael Brown'),'Runway Fantasy'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Michael Brown'),'Dress to Impress'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Sarah Davis'),'The Fashion Edit'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Sarah Davis'),'Designer Desires'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Sarah Davis'),'Haute Couture Wishlist'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Sarah Davis'),'Trendy Treasures'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Robert Clark'),'Fashionistas Haven'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Jessica Hall'),'Style Obsessions'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Jessica Hall'),'Luxe Finds'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Andrew Young'),'Dress Code Wishlist'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Amanda Turner'),'Statement Pieces'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Brian Moore'),'Fashion Frenzy'),
+((SELECT Customer_id FROM Customer WHERE Nama_customer = 'Megan Lewis'),'Ultimate Style Wishlist');
