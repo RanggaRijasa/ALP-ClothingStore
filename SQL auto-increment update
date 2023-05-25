@@ -8,6 +8,7 @@ create table Customer(
     Nama_customer varchar(50) not null,
     Email_customer varchar(50) not null,
     Password_customer varchar(50) not null,
+    Saldo_customer int not null default 0,
     constraint Email_customer unique (Email_customer),
     Primary Key (Customer_id)
 );
@@ -25,6 +26,7 @@ create table PRODUK(
     Nama_produk varchar(50) not null,
 	harga int,
     quantity int,
+    produk_image varchar(60),
     foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id),
 	Primary Key (Produk_id)
     
