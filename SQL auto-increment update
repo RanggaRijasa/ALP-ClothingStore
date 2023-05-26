@@ -8,7 +8,7 @@ create table Customer(
     Nama_customer varchar(50) not null,
     Email_customer varchar(50) not null,
     Password_customer varchar(50) not null,
-    Saldo_customer int not null default 0,
+    e_money DECIMAL(10,2) default 0,
     constraint Email_customer unique (Email_customer),
     Primary Key (Customer_id)
 );
@@ -32,25 +32,6 @@ create table PRODUK(
     
     -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
 );
-
-/*
-create table PRODUK(
-	Produk_id varchar (5),
-    kategori_id varchar (5),
-    Nama_produk varchar(50) not null,
-	harga int,
-	Primary Key (Produk_id),
-    constraint fk_kategori foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
-    -- foreign key (kategori_id) references KATEGORI_PRODUK(kategori_id)
-);
-*/
-
-
-
-/*
-alter table PRODUK
-	add constraint foreign key(Nama_kategori) references KATEGORI_PRODUK(Nama_kategori);
-*/
     
 create table WARNA(
 	Warna_id int unsigned not null auto_increment,
@@ -110,6 +91,29 @@ create table DETAIL_WISHLIST(
     foreign key (Warna_id) references WARNA(Warna_id),
     foreign key (Ukuran_id) references UKURAN(Ukuran_id),
     primary key (Detail_WLID)
+);
+
+-- Cart
+
+create table CART(
+	Cart_id int unsigned not null auto_increment,
+	Customer_id int unsigned,
+    Nama_cartt varchar (50) not null,
+    primary key (Cart_id),
+    foreign key (Customer_id) references CUSTOMER(Customer_id)
+);
+
+create table DETAIL_CART(
+	Detail_cartid int unsigned not null auto_increment,
+	Cart_id int unsigned,
+	Produk_id int unsigned,
+    Warna_id int unsigned,
+    Ukuran_id int unsigned,
+    foreign key (Cart_id) references CART(Cart_id),
+	foreign key (Produk_id) references PRODUK(Produk_id),
+    foreign key (Warna_id) references WARNA(Warna_id),
+    foreign key (Ukuran_id) references UKURAN(Ukuran_id),
+    primary key (Detail_cartid)
 );
 
 insert into Customer (Nama_customer, Email_customer, Password_customer)
